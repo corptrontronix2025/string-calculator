@@ -9,7 +9,18 @@ public class Calculator
             return 0;
         }
 
-        var parts = numbers.Split(new[] { ',', '\n' });
+        var delimiters = new List<string> { ",", "\n" };
+        var numberSection = numbers;
+
+        if (numbers.StartsWith("//"))
+        {
+            var delimiterEndIndex = numbers.IndexOf('\n');
+            var delimiter = numbers.Substring(2, delimiterEndIndex - 2);
+            delimiters.Add(delimiter);
+            numberSection = numbers.Substring(delimiterEndIndex + 1);
+        }
+
+        var parts = numberSection.Split(delimiters.ToArray(), StringSplitOptions.None);
         var parsedNumbers = parts.Select(ParseNumber).ToList();
 
         var negatives = parsedNumbers.Where(n => n < 0).ToList();

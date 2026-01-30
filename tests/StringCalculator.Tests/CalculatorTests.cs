@@ -101,4 +101,25 @@ public class CalculatorTests
         var result = _calculator.Add("1\n2\n3");
         Assert.Equal(6, result);
     }
+
+    [Fact]
+    public void Add_CustomSingleCharDelimiter_ReturnsSum()
+    {
+        var result = _calculator.Add("//#\n2#5");
+        Assert.Equal(7, result);
+    }
+
+    [Fact]
+    public void Add_CustomDelimiterWithInvalidNumber_ReturnsSum()
+    {
+        var result = _calculator.Add("//,\n2,ff,100");
+        Assert.Equal(102, result);
+    }
+
+    [Fact]
+    public void Add_CustomDelimiterStillSupportsCommaAndNewline_ReturnsSum()
+    {
+        var result = _calculator.Add("//#\n1#2,3\n4");
+        Assert.Equal(10, result);
+    }
 }

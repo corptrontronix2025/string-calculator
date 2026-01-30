@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace StringCalculator;
 
 public class Calculator
@@ -17,10 +19,13 @@ public class Calculator
             var delimiterEndIndex = numbers.IndexOf('\n');
             var delimiterSection = numbers.Substring(2, delimiterEndIndex - 2);
 
-            if (delimiterSection.StartsWith("[") && delimiterSection.EndsWith("]"))
+            if (delimiterSection.StartsWith("["))
             {
-                var delimiter = delimiterSection.Substring(1, delimiterSection.Length - 2);
-                delimiters.Add(delimiter);
+                var matches = Regex.Matches(delimiterSection, @"\[([^\]]+)\]");
+                foreach (Match match in matches)
+                {
+                    delimiters.Add(match.Groups[1].Value);
+                }
             }
             else
             {

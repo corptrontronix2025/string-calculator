@@ -122,4 +122,18 @@ public class CalculatorTests
         var result = _calculator.Add("//#\n1#2,3\n4");
         Assert.Equal(10, result);
     }
+
+    [Fact]
+    public void Add_CustomMultiCharDelimiter_ReturnsSum()
+    {
+        var result = _calculator.Add("//[***]\n11***22***33");
+        Assert.Equal(66, result);
+    }
+
+    [Fact]
+    public void Add_CustomMultiCharDelimiterWithOtherDelimiters_ReturnsSum()
+    {
+        var result = _calculator.Add("//[##]\n1##2,3\n4");
+        Assert.Equal(10, result);
+    }
 }

@@ -15,8 +15,18 @@ public class Calculator
         if (numbers.StartsWith("//"))
         {
             var delimiterEndIndex = numbers.IndexOf('\n');
-            var delimiter = numbers.Substring(2, delimiterEndIndex - 2);
-            delimiters.Add(delimiter);
+            var delimiterSection = numbers.Substring(2, delimiterEndIndex - 2);
+
+            if (delimiterSection.StartsWith("[") && delimiterSection.EndsWith("]"))
+            {
+                var delimiter = delimiterSection.Substring(1, delimiterSection.Length - 2);
+                delimiters.Add(delimiter);
+            }
+            else
+            {
+                delimiters.Add(delimiterSection);
+            }
+
             numberSection = numbers.Substring(delimiterEndIndex + 1);
         }
 

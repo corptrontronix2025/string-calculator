@@ -31,10 +31,19 @@ public class CalculatorTests
     }
 
     [Fact]
-    public void Add_TwoNumbersWithNegative_ReturnsSum()
+    public void Add_SingleNegative_ThrowsException()
     {
-        var result = _calculator.Add("4,-3");
-        Assert.Equal(1, result);
+        var exception = Assert.Throws<ArgumentException>(() => _calculator.Add("4,-3"));
+        Assert.Contains("-3", exception.Message);
+    }
+
+    [Fact]
+    public void Add_MultipleNegatives_ThrowsExceptionWithAllNegatives()
+    {
+        var exception = Assert.Throws<ArgumentException>(() => _calculator.Add("-1,2,-3,4,-5"));
+        Assert.Contains("-1", exception.Message);
+        Assert.Contains("-3", exception.Message);
+        Assert.Contains("-5", exception.Message);
     }
 
     [Fact]

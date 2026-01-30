@@ -10,14 +10,15 @@ public class Calculator
         }
 
         var parts = numbers.Split(new[] { ',', '\n' });
+        var parsedNumbers = parts.Select(ParseNumber).ToList();
 
-        int sum = 0;
-        foreach (var part in parts)
+        var negatives = parsedNumbers.Where(n => n < 0).ToList();
+        if (negatives.Any())
         {
-            sum += ParseNumber(part);
+            throw new ArgumentException($"Negatives not allowed: {string.Join(", ", negatives)}");
         }
 
-        return sum;
+        return parsedNumbers.Sum();
     }
 
     private int ParseNumber(string input)

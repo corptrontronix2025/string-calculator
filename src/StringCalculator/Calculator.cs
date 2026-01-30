@@ -11,11 +11,6 @@ public class Calculator
 
         var parts = numbers.Split(',');
 
-        if (parts.Length > 2)
-        {
-            throw new ArgumentException("Maximum of 2 numbers allowed");
-        }
-
         int sum = 0;
         foreach (var part in parts)
         {

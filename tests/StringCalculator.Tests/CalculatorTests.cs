@@ -52,9 +52,10 @@ public class CalculatorTests
     }
 
     [Fact]
-    public void Add_MoreThanTwoNumbers_ThrowsException()
+    public void Add_MultipleNumbers_ReturnsSum()
     {
-        Assert.Throws<ArgumentException>(() => _calculator.Add("1,2,3"));
+        var result = _calculator.Add("1,2,3,4,5,6,7,8,9,10,11,12");
+        Assert.Equal(78, result);
     }
 
     [Fact]

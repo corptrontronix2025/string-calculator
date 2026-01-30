@@ -64,4 +64,18 @@ public class CalculatorTests
         var result = _calculator.Add(null);
         Assert.Equal(0, result);
     }
+
+    [Fact]
+    public void Add_NewlineDelimiter_ReturnsSum()
+    {
+        var result = _calculator.Add("1\n2,3");
+        Assert.Equal(6, result);
+    }
+
+    [Fact]
+    public void Add_OnlyNewlineDelimiters_ReturnsSum()
+    {
+        var result = _calculator.Add("1\n2\n3");
+        Assert.Equal(6, result);
+    }
 }

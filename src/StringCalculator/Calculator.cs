@@ -9,7 +9,7 @@ public class Calculator
             return 0;
         }
 
-        var parts = numbers.Split(',');
+        var parts = numbers.Split(new[] { ',', '\n' });
 
         int sum = 0;
         foreach (var part in parts)

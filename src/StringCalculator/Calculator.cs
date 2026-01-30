@@ -25,7 +25,7 @@ public class Calculator
     {
         if (int.TryParse(input.Trim(), out int number))
         {
-            return number;
+            return number > 1000 ? 0 : number;
         }
         return 0;
     }

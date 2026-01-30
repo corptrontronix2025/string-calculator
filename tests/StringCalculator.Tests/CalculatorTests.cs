@@ -26,8 +26,22 @@ public class CalculatorTests
     [Fact]
     public void Add_TwoNumbers_ReturnsSum()
     {
-        var result = _calculator.Add("1,5000");
-        Assert.Equal(5001, result);
+        var result = _calculator.Add("1,500");
+        Assert.Equal(501, result);
+    }
+
+    [Fact]
+    public void Add_NumberGreaterThan1000_IsIgnored()
+    {
+        var result = _calculator.Add("2,1001,6");
+        Assert.Equal(8, result);
+    }
+
+    [Fact]
+    public void Add_NumberEqualTo1000_IsIncluded()
+    {
+        var result = _calculator.Add("2,1000,6");
+        Assert.Equal(1008, result);
     }
 
     [Fact]
